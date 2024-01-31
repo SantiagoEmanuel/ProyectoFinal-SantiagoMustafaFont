@@ -50,8 +50,8 @@ function facturaA(tipoFactura, cuil, nombre, producto, precio, cantidad) {
 
     // Completamos los datos de cada elemento.
     h2.innerHTML = `Factura ${tipoFactura}`
-    p.innerHTML = `${cuil} | ${nombre}`
-    p2.innerHTML = `${producto} a ${(precioConIva)} c/u || ${precioConIva * cantidad}.`
+    p.innerHTML = `CUIL-CUIT: ${cuil} | NOMBRE: ${nombre}`
+    p2.innerHTML = `PRODUCTO: ${producto} VALOR: ${(precioConIva)}|| TOTAL:${precioConIva * cantidad}.`
 
     // Agregamos a los padres los contenedores hijos.
     div2.append(h2)
@@ -77,7 +77,7 @@ function facturaB(tipoFactura, cuil, nombre, producto, precio, cantidad) {
 
     // Agregamos contenido a los elementos.
     h2.innerHTML = `Factura ${tipoFactura}`
-    p.innerHTML = `${cuil} | ${nombre}`
+    p.innerHTML = `CUIL-CUIT: ${cuil} | NOMBRE: ${nombre}`
     p2.innerHTML = `${producto} a ${precio} c/u || ${precio * cantidad}`
 
     // Agregamos a los padres los contenedores hijos.
