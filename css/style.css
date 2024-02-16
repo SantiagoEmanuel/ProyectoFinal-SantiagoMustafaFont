@@ -1,29 +1,9 @@
 * {
-    padding: 0;
+    background-color: #000;
+    color: #ccc;
     margin: 0;
-    box-sizing: border-box;
+    padding: 0;
+    box-sizing: content-box;
     border: none;
-    color: #ccc
-}
-
-body {
-    background-color: #000000e5;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding-top: 50px;
-    gap: 150px;
-}
-
-#factura div {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 16px;
-    font-size: 1.5rem;
-    letter-spacing: .15rem;
-    height: 100%;
-    width: 100%;
+    text-decoration: none;
 }

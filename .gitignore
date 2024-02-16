@@ -1,5 +1,5 @@
-# Ignoro las palabras agregadas a mi workspace
+# Archivo .vscode
 .vscode
 
-# Ignoro las funciones creadas en la carpeta funciones
-functions
+# Archivo de pruebas
+/test
