@@ -19,7 +19,7 @@ Registra un nuevo usuario en la base de datos.
 
 Inicia sesión del usuario con el correo electrónico y contraseña proporcionados.
 
-### `generarPedido(user, products)`
+### `generarPedido(user)`
 
 Genera el pedido del cliente (producto y cantidad) seleccionando de una lista de productos disponibles.
 
