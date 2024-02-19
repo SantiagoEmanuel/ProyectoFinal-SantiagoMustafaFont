@@ -5,10 +5,10 @@ const b = "B";
 
 // "Base de datos" de los productos disponibles [no maneja stock aún].
 const products = [
-    { product: "Bidon de agua", litros: 20, price: 600 },
-    { product: "Bidon de agua", litros: 10, price: 400 },
-    { product: "Bolsa de hielo", kilos: 12, price: 700 },
-    { product: "Bolsa de hielo", kilos: 3, price: 300 },
+    { product: "Bidon de agua", litros: 20, price: 700 },
+    { product: "Bidon de agua", litros: 10, price: 500 },
+    { product: "Bolsa de hielo", kilos: 12, price: 1000 },
+    { product: "Bolsa de hielo", kilos: 3, price: 500 },
 ];
 
 // "Base de datos" de los usuarios registrados.
@@ -28,7 +28,6 @@ class User {
         this.password = password;
     }
 }
-
 /**
  * Registra un nuevo usuario en la base de datos.
  * @param {string} username - Nombre de usuario
@@ -39,19 +38,36 @@ class User {
  */
 function register(username, mail, password, passwordConfirmation) {
     // Comprobamos que las contraseñas coincidan.
+    if (password == vacio || mail == vacio || username == vacio) {
+        alert('Debes ingresar todos los datos solicitados')
+    }
     if (password === passwordConfirmation) {
-        // Ingresamos al usuario a la base de datos.
-        users.push(new User(username, mail, password));
+        // Recorremos la lista de usuarios
+        for (const user of users) {
+            // Comprobamos si ya existe el correo en la "base de datos"
+            if (user.mail == mail) {
+                alert('Ya hay una cuenta existente con ese correo')
+                return false;
+            }
+
+
+            // Ingresamos al usuario a la base de datos.
+            users.push(new User(username, mail, password));
+        }
+        // Verificamos que haya algo en la lista de usuarios
+        if (users.length == 0) {
+            users.push(new User(username, mail, password));
+        }
     } else {
         // Avisamos que las contraseñas no coinciden.
         alert("Los las contraseñas no coinciden.");
-        return;
+        return false;
     }
 
     // Iniciamos sesión.
-    login(mail, password);
+    const isLogin = login(mail, password);
 
-    return username;
+    return [isLogin, username];
 }
 
 /**
@@ -63,31 +79,32 @@ function login(mail, password) {
     // Corroboramos que los datos ingresados coincidan con algún usuario en la base de datos.
     if (users.some((e) => e.mail == mail && e.password == password)) {
         alert(`Bienvenido!`);
+        return true;
     } else {
         alert("Lo datos ingresados están mal o no coinciden con ningún usuario.");
+        return false;
     }
 }
 
 /**
  * Genera el pedido del cliente (producto y cantidad).
  * @param {string} user - Nombre del usuario
- * @param {Array} products - Lista de productos disponibles
  * @returns {Array} - Índice del producto seleccionado y cantidad
  */
-function generarPedido(user, products) {
+function generarPedido(user) {
     do {
         pedido = parseInt(
             prompt(
                 `Bienvenido, ${user} a Agua Santa Ángela \n\nSelecciona tu pedido \n1)Bidón de Agua x 20lts \n2)Bidón de Agua x 10lts \n3)Bolsa de hielo x 12kg \n4)Bolsa de hielo x 3kg`
             )
         );
-    } while (pedido <= 0 || pedido >= 5);
+    } while (isNaN(pedido) || (pedido <= 0 || pedido >= 5));
 
     do {
         cantidad = parseInt(
-            prompt(`Ingrese la cantidad de ${products[pedido - 1].product} necesitas`)
+            prompt(`Ingrese la cantidad de productos que necesitas`)
         );
-    } while (cantidad <= 0);
+    } while (isNaN(cantidad) || (cantidad <= 0));
 
     return [pedido - 1, cantidad];
 }
@@ -123,7 +140,7 @@ function pedirCuit() {
  * @returns {Number} - Valor del producto más IVA
  */
 function calcularIVA(precio) {
-    return precio * 0.21 + precio;
+    return precio * 1.21;
 }
 
 /**
@@ -160,13 +177,15 @@ function iniciarEmulador(products) {
     const passwordConfirmation = prompt("Confirma tu contraseña").toLowerCase();
 
     // Registramos al usuario y guaramos su nombre.
-    const user = register(username, mail, password, passwordConfirmation);
+    const [isRegister, user] = register(username, mail, password, passwordConfirmation);
 
-    // Registramos el pedido del usuario, guardamos el producto desea y la cantidad del mismo.
-    const [producto, cant] = generarPedido(user, products);
+    if (isRegister) {
+        // Registramos el pedido del usuario, guardamos el producto desea y la cantidad del mismo.
+        const [producto, cant] = generarPedido(user);
 
-    // Generamos la factura de la compra.
-    generarFactura(producto, cant, user, products);
+        // Generamos la factura de la compra.
+        generarFactura(producto, cant, user, products);
+    }
 }
 
 /**
