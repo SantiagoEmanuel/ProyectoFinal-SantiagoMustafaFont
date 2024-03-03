@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Agua Santa Ángela | Iniciar sesión</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+  <body>
+    <header></header>
+    <main>
+      <form id="form" class="login">
+        <fieldset>
+          <div id="err" class="hidden">
+            <span class="err">Error: Credenciales incorrectas</span>
+          </div>
+          <legend>Inicia Sesión</legend>
+          <label>
+            Ingresa tu E-mail
+            <input
+              type="email"
+              name="email"
+              placeholder="example@example.com"
+              autocomplete="off"
+              required
+            />
+          </label>
+          <label>
+            Ingresa tu contraseña
+            <input
+              type="password"
+              name="password"
+              min="8"
+              max="64"
+              placeholder="password"
+              required
+            />
+          </label>
+          <input type="submit" value="Iniciar sesión" />
+        </fieldset>
+      </form>
+    </main>
+    <script type="module" src="../js/main.js"></script>
+  </body>
+</html>

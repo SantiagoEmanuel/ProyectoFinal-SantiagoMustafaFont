@@ -1,176 +1,105 @@
-// Evitamos magic strings
-const vacio = "";
-const a = "A";
-const b = "B";
+import { register } from "./user/functions/register.js";
+import { login } from "./user/functions/login.js";
+import { logout } from "./user/functions/logout.js";
 
-// "Base de datos" de los productos disponibles [no maneja stock aún].
-const products = [
-    { product: "Bidon de agua", litros: 20, price: 600 },
-    { product: "Bidon de agua", litros: 10, price: 400 },
-    { product: "Bolsa de hielo", kilos: 12, price: 700 },
-    { product: "Bolsa de hielo", kilos: 3, price: 300 },
-];
+// Inicializamos el almacenamiento del carrito de compras u obtenemos los valores del usuario.
+const carrito = JSON.parse(localStorage.getItem("carrito")) || []
 
-// "Base de datos" de los usuarios registrados.
-const users = [];
+// Inicializamos la base de datos de los usuarios u obtenemos la misma.
+const users = JSON.parse(localStorage.getItem("usersDB")) || []
 
-// Clase Usuarios
-class User {
-    /**
-     * Constructor de la clase User
-     * @param {String} username - Nombre del usuario
-     * @param {String} mail - Correo electrónico del usuario
-     * @param {String} password - Contraseña del usuario
-     */
-    constructor(username, mail, password) {
-        this.username = username;
-        this.mail = mail;
-        this.password = password;
+document.addEventListener("DOMContentLoaded", () => {
+
+    // Registro - Inicio de sesión
+    const form = document.getElementById("form");
+    form?.addEventListener("submit", (e) => {
+        e.preventDefault();
+        if (form.classList.contains("login")) {
+            login(e.target.email.value, e.target.password.value, users);
+        } else {
+            const fullName = e.target.name.value;
+            const email = e.target.email.value;
+            const password = e.target.password.value;
+            const passwordConfirmation = e.target.confirmation.value;
+
+            register(
+                fullName,
+                email.toLowerCase(),
+                password,
+                passwordConfirmation,
+                users
+            );
+        }
+    });
+
+    // Cerrar sesión del usuario
+    const btnLogout = document.getElementById("logout");
+    btnLogout?.addEventListener("click", () => {
+        logout();
+    });
+
+    // Comprobamos si el usuario inició sesión para mostrar el contenido de la página
+    const userLogin = JSON.parse(localStorage.getItem("userIsLogin"));
+    if (userLogin?.isLogin) {
+        const appNoLogin = document.getElementById("noLogin");
+        const app = document.getElementById("app");
+        const nav = document.getElementById('nav');
+
+        appNoLogin?.classList.add("hidden");
+        app?.classList.remove("hidden");
+        nav?.classList.remove('hidden');
+        nav?.classList.add('nav')
     }
-}
 
-/**
- * Registra un nuevo usuario en la base de datos.
- * @param {string} username - Nombre de usuario
- * @param {string} mail - Correo electrónico del usuario
- * @param {string} password - Contraseña del usuario
- * @param {string} passwordConfirmation - Confirmación de la contraseña del usuario
- * @returns {string} - Nombre de usuario registrado
- */
-function register(username, mail, password, passwordConfirmation) {
-    // Comprobamos que las contraseñas coincidan.
-    if (password === passwordConfirmation) {
-        // Ingresamos al usuario a la base de datos.
-        users.push(new User(username, mail, password));
-    } else {
-        // Avisamos que las contraseñas no coinciden.
-        alert("Los las contraseñas no coinciden.");
-        return;
+    // Carrito de compras
+    const carritoNotificaciones = document.getElementById(
+        "carritoNotificaciones"
+    );
+    const buttons = document.getElementsByTagName("button");
+    if (carrito.length > 0) {
+        carritoNotificaciones.classList.remove("hidden")
+        carritoNotificaciones.innerHTML = `${carrito.length}`;
+    }
+    for (const btn of buttons) {
+        btn.addEventListener("click", () => {
+            carrito.push(btn.name);
+            localStorage.setItem("carrito", JSON.stringify(carrito));
+            carritoNotificaciones.innerHTML = `${carrito.length}`;
+            carritoNotificaciones.classList.remove("hidden");
+        });
     }
 
-    // Iniciamos sesión.
-    login(mail, password);
+    // página de carrito de compras
+    const carritoCompras = document.getElementById('carritoCompras') || false;
+    if (carritoCompras) {
+        const div = document.createElement('article')
+        if (carrito.length > 0) {
+            carrito.forEach((element) => {
+                const x = document.createElement('div')
+                x.innerHTML = `${element}`
+                div.append(x)
+            })
+            carritoCompras.append(div)
+        } else {
+            div.innerHTML = `
+            <h2> No tienes nada en tu carrito! </h2>
+            `
+            carritoCompras.append(div)
+        }
 
-    return username;
-}
-
-/**
- * Inicia sesión del usuario con el correo electrónico y contraseña proporcionados.
- * @param {string} mail - Correo electrónico del usuario
- * @param {string} password - Contraseña del usuario
- */
-function login(mail, password) {
-    // Corroboramos que los datos ingresados coincidan con algún usuario en la base de datos.
-    if (users.some((e) => e.mail == mail && e.password == password)) {
-        alert(`Bienvenido!`);
-    } else {
-        alert("Lo datos ingresados están mal o no coinciden con ningún usuario.");
+        const comprar = document.getElementById('comprar')
+        carrito.length == 0 ? comprar.classList.add('hidden') :
+            comprar.addEventListener('click', () => {
+                localStorage.removeItem('carrito')
+                const realizado = document.getElementById('comprado')
+                realizado.classList.remove('hidden')
+                realizado.classList.add('comprado')
+                carritoCompras.classList.add('hidden')
+                setTimeout(() => {
+                    realizado.classList.add('hidden')
+                    realizado.classList.remove('comprado')
+                    window.location.reload();
+                }, 1000)
+            })
     }
-}
-
-/**
- * Genera el pedido del cliente (producto y cantidad).
- * @param {string} user - Nombre del usuario
- * @param {Array} products - Lista de productos disponibles
- * @returns {Array} - Índice del producto seleccionado y cantidad
- */
-function generarPedido(user, products) {
-    do {
-        pedido = parseInt(
-            prompt(
-                `Bienvenido, ${user} a Agua Santa Ángela \n\nSelecciona tu pedido \n1)Bidón de Agua x 20lts \n2)Bidón de Agua x 10lts \n3)Bolsa de hielo x 12kg \n4)Bolsa de hielo x 3kg`
-            )
-        );
-    } while (pedido <= 0 || pedido >= 5);
-
-    do {
-        cantidad = parseInt(
-            prompt(`Ingrese la cantidad de ${products[pedido - 1].product} necesitas`)
-        );
-    } while (cantidad <= 0);
-
-    return [pedido - 1, cantidad];
-}
-
-/**
- * Obtiene el tipo de factura (A o B) del usuario.
- * @returns {string} - Tipo de factura seleccionado
- */
-function tipoFactura() {
-    do {
-        x = prompt("Ingresa el tipo de factura que deseas hacer (A o B)");
-        x = x.toUpperCase();
-    } while (x != a && x != b);
-
-    return x;
-}
-
-/**
- * Pide ingresar el CUIT al usuario como dato para la Factura.
- * @returns {String} - Número CUIT del usuario
- */
-function pedirCuit() {
-    do {
-        cuit = prompt("Ingresa tu CUIT");
-    } while (cuit == vacio);
-
-    return cuit;
-}
-
-/**
- * Genera el valor del producto con IVA para la factura A.
- * @param {Number} precio - valor del producto sin IVA
- * @returns {Number} - Valor del producto más IVA
- */
-function calcularIVA(precio) {
-    return precio * 0.21 + precio;
-}
-
-/**
- * Genera la factura A o B y es impresa en consola.
- * @param {Number} producto - Índice del producto seleccionado
- * @param {Number} cantidad - Cantidad de productos requeridos por el usuario
- * @param {String} user - Nombre del usuario
- * @param {Array} products - Lista de productos disponibles
- */
-function generarFactura(producto, cantidad, user, products) {
-    const factura = tipoFactura();
-
-    // Pedimos los datos para realizar la Factura.
-    const cuit = pedirCuit();
-
-    if (factura == a) {
-        const precioConIVA = calcularIVA(products[producto].price)
-
-        console.log(`Nombre: ${user} | CUIT: ${cuit}`)
-        console.log(`Producto ${products[producto].product} | Precio unitario: ${precioConIVA} | Cantidad de productos solicitados: ${cantidad} | TOTAL: ${precioConIVA * cantidad}`);
-
-    } else {
-        console.log(`Nombre: ${user} | CUIT: ${cuit}`)
-        console.log(`Producto ${products[producto].product} | Precio unitario: ${products[producto].price} | Cantidad de productos solicitados: ${cantidad} | TOTAL: ${products[producto].price * cantidad}`);
-    }
-}
-
-
-function iniciarEmulador(products) {
-    alert("Comencemos por crear una cuenta!");
-    const username = prompt("Ingresa tu nombre y apellido").toUpperCase();
-    const mail = prompt("Ingresa tu correo electrónico").toLowerCase();
-    const password = prompt("Ingresa tu contraseña").toLowerCase();
-    const passwordConfirmation = prompt("Confirma tu contraseña").toLowerCase();
-
-    // Registramos al usuario y guaramos su nombre.
-    const user = register(username, mail, password, passwordConfirmation);
-
-    // Registramos el pedido del usuario, guardamos el producto desea y la cantidad del mismo.
-    const [producto, cant] = generarPedido(user, products);
-
-    // Generamos la factura de la compra.
-    generarFactura(producto, cant, user, products);
-}
-
-/**
- * Inicia la emulación de compra y facturación de un usuario en una planta de agua y hielo.
- * @param {Array} products - Array de productos disponibles
- */
-iniciarEmulador(products);
+});

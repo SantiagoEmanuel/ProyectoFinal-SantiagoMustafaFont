@@ -1,0 +1,13 @@
+{
+  "products": [
+    { "id": 1, "product": "Envase de agua", "litros": 40, "price": 8000 },
+    { "id": 2, "product": "Envase de agua", "litros": 20, "price": 5000 },
+    { "id": 3, "product": "Envase de agua", "litros": 10, "price": 4000 },
+    { "id": 4, "product": "Recarga de agua", "litros": 40, "price": 1000 },
+    { "id": 5, "product": "Recarga de agua", "litros": 20, "price": 600 },
+    { "id": 6, "product": "Recarga de agua", "litros": 10, "price": 400 },
+    { "id": 7, "product": "Bolsa de hielo", "kilos": 12, "price": 700 },
+    { "id": 8, "product": "Bolsa de hielo", "kilos": 3, "price": 300 },
+    { "id": 9, "product": "Bolsa de hielo", "kilos": 1.5, "price": 250 }
+  ]
+}

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Agua Santa Ángela | Regístrate</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+  <body>
+    <main>
+      <form id="form" class="register">
+        <fieldset>
+          <div id="err" class="hidden"><span class="err"></span></div>
+          <legend>Inicia Sesión</legend>
+          <label>
+            Ingresa tu Nombre:
+            <input type="text" name="name" placeholder="example" required />
+          </label>
+          <label>
+            Ingresa tu E-mail:
+            <input
+              type="email"
+              name="email"
+              placeholder="example@example.com"
+              autocomplete="off"
+              required
+            />
+          </label>
+          <label>
+            Ingresa tu contraseña:
+            <input
+              type="password"
+              name="password"
+              min="6"
+              max="68"
+              placeholder="password"
+              required
+            />
+          </label>
+          <label>
+            Ingresa tu contraseña:
+            <input
+              type="password"
+              name="confirmation"
+              min="6"
+              max="68"
+              placeholder="password confirmation"
+              required
+            />
+          </label>
+          <input type="submit" value="Crear usuario" />
+        </fieldset>
+      </form>
+    </main>
+    <script type="module" src="../js/main.js"></script>
+  </body>
+</html>

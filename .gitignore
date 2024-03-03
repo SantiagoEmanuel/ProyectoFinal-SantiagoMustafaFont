@@ -1,5 +1,5 @@
 # Archivo .vscode
 .vscode
 
-# Archivo de pruebas
-/test
+# User class errors
+errors.js

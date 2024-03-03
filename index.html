@@ -1,22 +1,149 @@
 <!DOCTYPE html>
 <html lang="es">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Agua Santa Ángela</title>
 
     <!-- CSS -->
-    <link rel="stylesheet" href="./css/style.css">
-</head>
+    <link rel="stylesheet" href="./css/style.css" />
 
-<body>
-    <header>
-        <h1>Agua Santa Ángela</h1>
+    <!-- META -->
+    <meta name="keywords" content="agua, potable, recarga" />
+    <meta
+      name="description"
+      content="Agua Santa Ángela - Venta de agua potable, mineralizada y tratada por osmosis inversa, la mejor agua al mejor precio."
+    />
+  </head>
+
+  <body>
+    <header class="header">
+      <h1>Agua Santa Ángela</h1>
+      <nav id="nav" class="hidden">
+        <a href="./pages/carrito.html" style="position: relative" class="btn">
+          <img src="./assets/carrito.png" alt="carrito de compras" />
+          <span class="hidden" id="carritoNotificaciones"></span>
+        </a>
+        <input class="btn" type="button" value="Cerrar sesión" id="logout" />
+      </nav>
     </header>
-    <main id="app"></main>
-
-    <script src="./js/main.js"></script>
-</body>
-
+    <main>
+      <div id="noLogin">
+        <h2>Bienvenido!</h2>
+        <p>Veo que no has iniciado sesión</p>
+        <p>
+          <a href="./pages/login.html">Inicia sesión</a>
+          o
+          <a href="./pages/register.html">Regístrate</a>
+        </p>
+      </div>
+      <div id="app" class="hidden app">
+        <header class="title">
+          <h2>Agua potabilizada y mineralizada</h2>
+        </header>
+        <section id="products">
+          <h2>Productos</h2>
+          <div>
+            <article>
+              <div>
+                <h4>Envase de Agua de 40lts</h4>
+              </div>
+              <div>
+                <p>$10.000</p>
+                <button name="envase de agua de 40lts">
+                  Agregar al carrito
+                </button>
+              </div>
+            </article>
+            <article>
+              <div>
+                <h4>Envase de Agua de 20lts</h4>
+              </div>
+              <div>
+                <p>$6.000</p>
+                <button name="envase de agua de 20lts">
+                  Agregar al carrito
+                </button>
+              </div>
+            </article>
+            <article>
+              <div>
+                <h4>Envase de Agua de 10lts</h4>
+              </div>
+              <div>
+                <p>$4.000</p>
+                <button name="envase de agua de 10lts">
+                  Agregar al carrito
+                </button>
+              </div>
+            </article>
+            <article>
+              <div>
+                <h4>Recarga de Agua de 40lts</h4>
+              </div>
+              <div>
+                <p>$1.500</p>
+                <button name="recarga de agua de 40lts">
+                  Agregar al carrito
+                </button>
+              </div>
+            </article>
+            <article>
+              <div>
+                <h4>Recarga de Agua de 20lts</h4>
+              </div>
+              <div>
+                <p>$1.000</p>
+                <button name="recarga de agua de 20lts">
+                  Agregar al carrito
+                </button>
+              </div>
+            </article>
+            <article>
+              <div>
+                <h4>Recarga de Agua de 10lts</h4>
+              </div>
+              <div>
+                <p>$600</p>
+                <button name="recarga de agua de 10lts">
+                  Agregar al carrito
+                </button>
+              </div>
+            </article>
+            <article>
+              <div>
+                <h4>Bolsa de Hielo de 10kg</h4>
+              </div>
+              <div>
+                <p>$1.000</p>
+                <button name="bolsa de hielo 10kg">Agregar al carrito</button>
+              </div>
+            </article>
+            <article>
+              <div>
+                <h4>Bolsa de Hielo de 3kg</h4>
+              </div>
+              <div>
+                <p>$400</p>
+                <button name="bolsa de hielo 3kg">Agregar al carrito</button>
+              </div>
+            </article>
+            <article>
+              <div>
+                <h4>Bolsa de Hielo de 1.5kg</h4>
+              </div>
+              <div>
+                <p>$250</p>
+                <button name="bolsa de hielo 1.5kg">Agregar al carrito</button>
+              </div>
+            </article>
+          </div>
+        </section>
+      </div>
+    </main>
+    <footer>
+      <p>Planta de agua ubicada en Santiago del Estero - Quimilí</p>
+    </footer>
+  </body>
+  <script type="module" src="./js/main.js"></script>
 </html>
