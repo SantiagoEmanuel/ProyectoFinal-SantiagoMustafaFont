@@ -1,4 +1,4 @@
-# Pre-entrega número dos - Emulador de Compra y Facturación de Agua y Hielo
+# Pre-entrega número tres - Emulador de Compra y Facturación de Agua y Hielo
 
 Este proyecto es un emulador de compra y facturación para una planta de agua y hielo llamada "Agua Santa Ángela". Permite a los usuarios registrados realizar pedidos de productos disponibles y generar facturas correspondientes.
 
