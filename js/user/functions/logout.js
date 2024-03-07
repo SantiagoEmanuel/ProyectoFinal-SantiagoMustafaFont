@@ -1,8 +1,16 @@
 /**
  * Cerrar la sesión del usuario, eliminar el carrito de compras del usuario y redirigir a la página principal
  */
-export function logout() {
-    localStorage.removeItem("userIsLogin");
+export function logout(carritoDeCompra, users, userLogin) {
+
+    const newUser = {
+        ...userLogin,
+        carrito: carritoDeCompra
+    }
+    users.splice(users.findIndex((user) => user.email == userLogin.email), 1, newUser)
+    localStorage.setItem('usersDB', JSON.stringify(users))
     localStorage.removeItem("carrito");
-    window.location.replace('http://127.0.0.1:5500/index.html');
+    localStorage.removeItem("userIsLogin");
+
+    window.location.reload()
 }

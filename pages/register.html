@@ -5,55 +5,161 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Agua Santa Ángela | Regístrate</title>
 
+    <!-- BOOTSTRAP CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+
     <!-- CSS -->
     <link rel="stylesheet" href="../css/style.css" />
   </head>
   <body>
+    <header
+      style="display: flex; justify-content: space-evenly; padding: 10px 0"
+      style="background-color: #e3f2fd"
+    >
+      <h1>Agua Santa Ángela</h1>
+      <nav class="navbar gap-4 hidden" id="navUserIsLogin">
+        <input
+          type="button"
+          class="btn btn-primary"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasWithBothOptions"
+          aria-controls="offcanvasWithBothOptions"
+          value="Carrito"
+          id="carritoBtn"
+        />
+
+        <input class="btn" type="button" value="Cerrar sesión" id="logout" />
+      </nav>
+      <nav class="navbar gap-4" id="navUserNotLogin">
+        <a href="./login.html" class="btn btn-primary"> Iniciar sesión </a>
+        <a href="./register.html" class="btn btn-primary"> Crear una cuenta </a>
+      </nav>
+    </header>
     <main>
-      <form id="form" class="register">
-        <fieldset>
-          <div id="err" class="hidden"><span class="err"></span></div>
-          <legend>Inicia Sesión</legend>
-          <label>
-            Ingresa tu Nombre:
-            <input type="text" name="name" placeholder="example" required />
-          </label>
-          <label>
-            Ingresa tu E-mail:
-            <input
-              type="email"
-              name="email"
-              placeholder="example@example.com"
-              autocomplete="off"
-              required
-            />
-          </label>
-          <label>
-            Ingresa tu contraseña:
-            <input
-              type="password"
-              name="password"
-              min="6"
-              max="68"
-              placeholder="password"
-              required
-            />
-          </label>
-          <label>
-            Ingresa tu contraseña:
-            <input
-              type="password"
-              name="confirmation"
-              min="6"
-              max="68"
-              placeholder="password confirmation"
-              required
-            />
-          </label>
-          <input type="submit" value="Crear usuario" />
+      <form
+        id="form"
+        class="register d-flex flex-column justify-content-center align-items-center"
+        style="width: 100%; height: 70vh"
+      >
+        <fieldset
+          class="d-flex flex-column p-3 gap-2"
+          style="width: 100%; max-width: 700px"
+        >
+          <div id="err" class="hidden">
+            <span class="err"></span>
+          </div>
+          <legend>Regístrate</legend>
+          <div class="input-group mb-3">
+            <span class="input-group-text"
+              ><img src="../assets/user-icon.png" alt="Icono de usuario"
+            /></span>
+            <div class="form-floating">
+              <input
+                type="text"
+                id="name"
+                name="name"
+                placeholder="example"
+                required
+                class="form-control"
+              />
+              <label for="name"> Ingresa tu Nombre </label>
+            </div>
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text">
+              <img src="../assets/email-icon.png" alt="Icono de email" />
+            </span>
+            <div class="form-floating">
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="example@example.com"
+                autocomplete="off"
+                required
+                class="form-control"
+              />
+              <label for="email"> Ingresa tu E-mail </label>
+            </div>
+          </div>
+          <div class="d-flex gap-2">
+            <div class="input-group mb-3">
+              <span class="input-group-text">
+                <img
+                  src="../assets/password-icon.png"
+                  alt="Icono de contraseña"
+                />
+              </span>
+              <div class="form-floating">
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  min="6"
+                  max="68"
+                  placeholder="password"
+                  required
+                  class="form-control"
+                />
+                <label for="password"> Ingresa tu contraseña </label>
+              </div>
+            </div>
+            <div class="input-group mb-3">
+              <span class="input-group-text">
+                <img
+                  src="../assets/password-icon.png"
+                  alt="Icono de contraseña"
+                />
+              </span>
+              <div class="form-floating">
+                <input
+                  type="password"
+                  id="passwordConfirmation"
+                  name="confirmation"
+                  min="6"
+                  max="68"
+                  placeholder="password confirmation"
+                  required
+                  class="form-control"
+                />
+                <label for="passwordConfirmation"> Repite tu contraseña </label>
+              </div>
+            </div>
+          </div>
+          <input type="submit" class="btn btn-primary" value="Crear usuario" />
         </fieldset>
       </form>
     </main>
-    <script type="module" src="../js/main.js"></script>
+    <aside
+      class="offcanvas offcanvas-end"
+      data-bs-scroll="true"
+      tabindex="-1"
+      id="offcanvasWithBothOptions"
+      aria-labelledby="offcanvasWithBothOptionsLabel"
+    >
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">
+          Tu carrito de compras
+        </h5>
+        <input
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="offcanvas"
+          aria-label="Close"
+        />
+      </div>
+      <div class="offcanvas-body d-flex flex-column gap-4" id="carrito"></div>
+    </aside>
   </body>
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"
+  ></script>
+  <script type="module" src="../js/main.js"></script>
 </html>

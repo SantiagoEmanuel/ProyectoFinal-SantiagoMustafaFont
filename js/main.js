@@ -2,9 +2,6 @@ import { register } from "./user/functions/register.js";
 import { login } from "./user/functions/login.js";
 import { logout } from "./user/functions/logout.js";
 
-// Inicializamos el almacenamiento del carrito de compras u obtenemos los valores del usuario.
-const carrito = JSON.parse(localStorage.getItem("carrito")) || []
-
 // Inicializamos la base de datos de los usuarios u obtenemos la misma.
 const users = JSON.parse(localStorage.getItem("usersDB")) || []
 
@@ -32,74 +29,105 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
+    // Comprobamos si el usuario inició sesión para mostrar el contenido de la página
+    const userLogin = JSON.parse(localStorage.getItem("userIsLogin"));
+    // Inicializamos el almacenamiento del carrito de compras u obtenemos los valores del usuario.
+    const carrito = JSON.parse(localStorage.getItem('carrito')) ?
+        JSON.parse(localStorage.getItem('carrito')) :
+        (userLogin.carrito.length != 0 ? userLogin.carrito : []);
+    if (userLogin?.isLogin) {
+        const userNotLogin = document.getElementById("userNotLogin");
+        const navUserLogin = document.getElementById('navUserIsLogin');
+        const navUserNotLogin = document.getElementById('navUserNotLogin');
+
+        const app = document.getElementById("app");
+
+        userNotLogin.classList.add("hidden");
+        userNotLogin.classList.add('d-none')
+        navUserLogin.classList.remove('hidden');
+        navUserNotLogin.classList.add('hidden');
+
+        app.classList.remove("hidden");
+    }
+
     // Cerrar sesión del usuario
     const btnLogout = document.getElementById("logout");
     btnLogout?.addEventListener("click", () => {
-        logout();
+        logout(carrito, users, userLogin);
     });
 
-    // Comprobamos si el usuario inició sesión para mostrar el contenido de la página
-    const userLogin = JSON.parse(localStorage.getItem("userIsLogin"));
-    if (userLogin?.isLogin) {
-        const appNoLogin = document.getElementById("noLogin");
-        const app = document.getElementById("app");
-        const nav = document.getElementById('nav');
-
-        appNoLogin?.classList.add("hidden");
-        app?.classList.remove("hidden");
-        nav?.classList.remove('hidden');
-        nav?.classList.add('nav')
-    }
-
-    // Carrito de compras
-    const carritoNotificaciones = document.getElementById(
-        "carritoNotificaciones"
-    );
     const buttons = document.getElementsByTagName("button");
-    if (carrito.length > 0) {
-        carritoNotificaciones.classList.remove("hidden")
-        carritoNotificaciones.innerHTML = `${carrito.length}`;
-    }
     for (const btn of buttons) {
         btn.addEventListener("click", () => {
             carrito.push(btn.name);
             localStorage.setItem("carrito", JSON.stringify(carrito));
-            carritoNotificaciones.innerHTML = `${carrito.length}`;
-            carritoNotificaciones.classList.remove("hidden");
+
+            const toastLive = document.getElementById('liveToast')
+            const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLive)
+
+            toastBootstrap.show()
+
+
         });
     }
 
-    // página de carrito de compras
-    const carritoCompras = document.getElementById('carritoCompras') || false;
-    if (carritoCompras) {
-        const div = document.createElement('article')
+    const carritoBtn = document.getElementById('carritoBtn');
+    const canvas = document.getElementById('carrito')
+    carritoBtn.addEventListener('click', () => {
         if (carrito.length > 0) {
-            carrito.forEach((element) => {
-                const x = document.createElement('div')
-                x.innerHTML = `${element}`
-                div.append(x)
-            })
-            carritoCompras.append(div)
+            fetch('../data/products.json')
+                .then(r => r.json())
+                .then((data) => {
+                    const article = document.createElement('article')
+                    var total = 0;
+                    data.products.forEach((product) => {
+                        const x = `${product.product} de ${product.litros}lts`
+                        const y = `${product.product} ${product.kilos}kg`
+                        carrito.forEach(selected => {
+                            if (y == selected) {
+                                const div = document.createElement('div')
+                                div.innerHTML = `${product.product} de ${product.kilos}kg: <span>$${product.price}</span>`
+                                div.classList.add('d-flex');
+                                div.classList.add('justify-content-between')
+                                div.classList.add('align-items-center')
+                                article.append(div)
+                                total = total + product.price;
+                            }
+                            if (x == selected) {
+                                const div = document.createElement('div')
+                                div.classList.add('d-flex');
+                                div.classList.add('justify-content-between')
+                                div.classList.add('align-items-center')
+                                div.innerHTML = `${product.product} de ${product.litros}lts: <span>$${product.price}</span>`
+                                article.append(div)
+                                total = total + product.price;
+                            }
+                        })
+                    })
+                    canvas.innerHTML = `
+                        <div class="d-flex flex-column gap-1 p-2 border text-capitalize">
+                            ${article.innerHTML}       
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center border p-2 text-capitalize">
+                            Total: <span>$${total}</span>
+                        </div>
+                        <input type="button" class="btn btn-danger" value="Comprar carrito" id="comprarElCarrito"/>
+                    `
+                    document.getElementById('comprarElCarrito')?.addEventListener('click', () => {
+                        localStorage.removeItem('carrito')
+                        carrito.splice(0, carrito.length)
+                        canvas.innerHTML = `
+                            <div> Felicidades, compraste tu carrito! </div>
+                        `;
+                    })
+                })
         } else {
-            div.innerHTML = `
-            <h2> No tienes nada en tu carrito! </h2>
+            canvas.innerHTML = `
+                <p class="h5 d-flex flex-column gap-2 align-items-center justify-content-center" style="margin-top: 3rem;">
+                <img src="../assets/error-404.webp" alt="No hay nada que mostrar en tu carrito de compras" width="300"/>
+                    Aún no tienes nada en tu carrito!
+                </p>
             `
-            carritoCompras.append(div)
         }
-
-        const comprar = document.getElementById('comprar')
-        carrito.length == 0 ? comprar.classList.add('hidden') :
-            comprar.addEventListener('click', () => {
-                localStorage.removeItem('carrito')
-                const realizado = document.getElementById('comprado')
-                realizado.classList.remove('hidden')
-                realizado.classList.add('comprado')
-                carritoCompras.classList.add('hidden')
-                setTimeout(() => {
-                    realizado.classList.add('hidden')
-                    realizado.classList.remove('comprado')
-                    window.location.reload();
-                }, 1000)
-            })
-    }
+    })
 });

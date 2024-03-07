@@ -1,50 +1,89 @@
-# Pre-entrega número tres - Emulador de Compra y Facturación de Agua y Hielo
+# Planta de Agua y Hielo
 
-Este proyecto es un emulador de compra y facturación para una planta de agua y hielo llamada "Agua Santa Ángela". Permite a los usuarios registrados realizar pedidos de productos disponibles y generar facturas correspondientes.
+¡Bienvenido al proyecto de la planta de agua y hielo "Agua Santa Ángela"! Esta aplicación web proporciona una plataforma para que los usuarios puedan registrarse, iniciar sesión, realizar compras de agua y hielo, y gestionar su carrito de compras. Con una interfaz moderna y receptiva basada en el framework Bootstrap, "Agua Santa Ángela" ofrece una experiencia de usuario intuitiva y satisfactoria.
 
-## Funcionalidades Principales
+## Funcionalidades
 
-- **Registro de Usuarios**: Los usuarios pueden registrarse ingresando su nombre, correo electrónico y contraseña.
-- **Inicio de Sesión**: Los usuarios pueden iniciar sesión con su correo electrónico y contraseña.
-- **Generación de Pedidos**: Los usuarios pueden seleccionar productos disponibles.
-- **Carrito de compras**: Los usuarios pueden ver sus productos seleccionados en carrito.
+### Registro de Usuarios
 
-## Funciones Principales
+Los usuarios pueden registrarse en la plataforma proporcionando un nombre de usuario, correo electrónico y contraseña. Se aplican validaciones para garantizar la seguridad de las credenciales de usuario.
 
-### `register(username, mail, password, passwordConfirmation, users)`
+### Inicio de Sesión
 
-Registra un nuevo usuario en la base de datos recibida como parámetro.
+Los usuarios pueden iniciar sesión utilizando su correo electrónico y contraseña. Se utiliza el almacenamiento local (`LocalStorage`) para recuperar el carrito de compras guardado previamente al iniciar sesión.
 
-### `login(mail, password, users)`
+### Cerrar Sesión
 
-Inicia sesión del usuario con el correo electrónico y contraseña proporcionados existentes en la base de datos recibida como parámetro.
+Los usuarios pueden cerrar sesión en cualquier momento. El carrito de compras se guarda automáticamente en `LocalStorage` para que los usuarios puedan retomar su sesión en futuras visitas.
 
-### `generarPedido(user)` **deprecated**
+### Carrito de Compras
 
-Genera el pedido del cliente (producto y cantidad) seleccionando de una lista de productos disponibles.
+Los usuarios pueden agregar productos al carrito de compras y realizar compras de manera conveniente. La plataforma proporciona una vista detallada del carrito de compras, incluyendo los productos agregados y su precio total.
 
-### `tipoFactura()` **deprecated**
+## Instalación
 
-Obtiene el tipo de factura (A o B) del usuario.
+Para probar la Planta de Agua y Hielo en tu máquina local, sigue estos pasos:
 
-### `pedirCuit()` **deprecated**
+1. Clona este repositorio a tu máquina local utilizando el siguiente comando:
 
-Pide ingresar el CUIT (Clave Única de Identificación Tributaria) al usuario como dato para la factura.
+    ```git
+    git clone https://github.com/tu_usuario/planta-agua-hielo.git
+    ```
 
-### `calcularIVA(precio)` **deprecated**
+2. Abre el archivo `index.html` en tu navegador web favorito para comenzar a explorar la aplicación.
 
-Genera el valor del producto con IVA para la factura A.
+## Estructura del Proyecto
 
-### `generarFactura(producto, cantidad, user, products)` **deprecated**
+La estructura del proyecto es la siguiente:
 
-Genera la factura A o B y es impresa en consola.
+```project root
+planta-agua-hielo/
+│
+├── assets/
+│ ├── envases/
+│ │ └── envase-20.webp
+│ ├── hielo/
+│ │ └── hielo-3.png
+│ ├── alert.png
+│ ├── carrito.png
+│ ├── email-icon.png
+│ ├── error-404.png
+│ ├── password-icon.png
+│ └── user-icon.png
+│
+├── data/
+│ └── products.json
+│
+├── css/
+│ └── style.css
+│
+├── js/
+│ ├── user/
+│ │ ├── class/
+│ │ │ └── user.js
+│ │ └── functions/
+│ │   ├── register.js
+│ │   ├── login.js
+│ │   └── logout.js
+│ └── main.js
+│
+├── pages/
+│ ├── login.html
+│ └── register.html
+│
+├── .gitignore
+│
+├── index.html
+│
+└── README.md
+```
 
-### `iniciarEmulador(products)` **deprecated**
+## Tecnologías Utilizadas
 
-Inicia la emulación de compra y facturación de un usuario en una planta de agua y hielo.
+- **HTML/CSS/JavaScript**: Para el desarrollo de la aplicación web.
+- **Bootstrap**: Framework de CSS para una interfaz de usuario moderna y receptiva.
+- **LocalStorage**: Para el almacenamiento de datos de usuarios y el carrito de compras.s
 
-## Uso
+## Autor
 
-1. Clona el repositorio o descarga el código.
-2. Abre `index.html` y crea tu cuenta.
-3. Ya está lista para que emules tus compras!
+Este proyecto fue creado por Santiago Emanuel Mustafá Font. Para cualquier pregunta o sugerencia, no dudes en ponerte en contacto.
