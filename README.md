@@ -1,4 +1,4 @@
-# Planta de Agua y Hielo
+# Pre-entrega número tres - Planta de agua y hielo.
 
 ¡Bienvenido al proyecto de la planta de agua y hielo "Agua Santa Ángela"! Esta aplicación web proporciona una plataforma para que los usuarios puedan registrarse, iniciar sesión, realizar compras de agua y hielo, y gestionar su carrito de compras. Con una interfaz moderna y receptiva basada en el framework Bootstrap, "Agua Santa Ángela" ofrece una experiencia de usuario intuitiva y satisfactoria.
 
@@ -27,7 +27,7 @@ Para probar la Planta de Agua y Hielo en tu máquina local, sigue estos pasos:
 1. Clona este repositorio a tu máquina local utilizando el siguiente comando:
 
     ```git
-    git clone https://github.com/tu_usuario/planta-agua-hielo.git
+    git clone https://github.com/SantiagoEmanuel/preEntrega-SantiagoMustafaFont.git
     ```
 
 2. Abre el archivo `index.html` en tu navegador web favorito para comenzar a explorar la aplicación.
