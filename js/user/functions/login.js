@@ -16,7 +16,7 @@ export function login(email, password, users) {
         user.isLogin = true;
         return (
             localStorage.setItem("userIsLogin", JSON.stringify(user)),
-            window.location.replace("http://127.0.0.1:5500/")
+            window.location.replace("https://santiagoemanuel.github.io/preEntrega-SantiagoMustafaFont/")
         );
     } else {
         const err = document.getElementById("err");
