@@ -124,7 +124,7 @@ document.addEventListener("DOMContentLoaded", () => {
         } else {
             canvas.innerHTML = `
                 <p class="h5 d-flex flex-column gap-2 align-items-center justify-content-center" style="margin-top: 3rem;">
-                <img src="../assets/error-404.webp" alt="No hay nada que mostrar en tu carrito de compras" width="300"/>
+                <img src="./assets/error-404.webp" alt="No hay nada que mostrar en tu carrito de compras" width="300"/>
                     Aún no tienes nada en tu carrito!
                 </p>
             `

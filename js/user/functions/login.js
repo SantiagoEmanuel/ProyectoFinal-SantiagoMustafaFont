@@ -15,6 +15,7 @@ export function login(email, password, users) {
         let user = users.find((e) => e.email == email);
         user.isLogin = true;
         return (
+
             localStorage.setItem("userIsLogin", JSON.stringify(user)),
             window.location.replace("https://santiagoemanuel.github.io/preEntrega-SantiagoMustafaFont/")
         );
