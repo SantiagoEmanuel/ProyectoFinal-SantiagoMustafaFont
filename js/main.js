@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Inicializamos el almacenamiento del carrito de compras u obtenemos los valores del usuario.
     const carrito = JSON.parse(localStorage.getItem('carrito')) ?
         JSON.parse(localStorage.getItem('carrito')) :
-        (userLogin.carrito.length != 0 ? userLogin.carrito : []);
+        (userLogin?.carrito.length != 0 ? userLogin?.carrito : []);
     if (userLogin?.isLogin) {
         const userNotLogin = document.getElementById("userNotLogin");
         const navUserLogin = document.getElementById('navUserIsLogin');
