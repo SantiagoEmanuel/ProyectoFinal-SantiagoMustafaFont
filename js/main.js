@@ -2,9 +2,6 @@ import { register } from "./user/functions/register.js";
 import { login } from "./user/functions/login.js";
 import { logout } from "./user/functions/logout.js";
 
-// Inicializamos la base de datos de los usuarios u obtenemos la misma.
-const users = getDataBase();
-
 document.addEventListener("DOMContentLoaded", () => {
     // Obtenemos al usuario si es que ha iniciado sesion.
     const userLogin = getUser();
@@ -155,21 +152,21 @@ function showCarrito(carrito) {
                         const y = `${product.product} ${product.kilos}kg`;
                         carrito.forEach((selected) => {
                             if (y == selected) {
-                                const div = document.createElement("div");
-                                div.innerHTML = `${product.product} de ${product.kilos}kg: <span>$${product.price}</span>`;
-                                div.classList.add("d-flex");
-                                div.classList.add("justify-content-between");
-                                div.classList.add("align-items-center");
-                                article.append(div);
+                                const p = document.createElement("p");
+                                p.innerHTML = `${product.product} de ${product.kilos}kg: <span>$${product.price}</span>`;
+                                p.classList.add("d-flex");
+                                p.classList.add("justify-content-between");
+                                p.classList.add("align-items-center");
+                                article.append(p);
                                 total = total + product.price;
                             }
                             if (x == selected) {
-                                const div = document.createElement("div");
-                                div.classList.add("d-flex");
-                                div.classList.add("justify-content-between");
-                                div.classList.add("align-items-center");
-                                div.innerHTML = `${product.product} de ${product.litros}lts: <span>$${product.price}</span>`;
-                                article.append(div);
+                                const p = document.createElement("p");
+                                p.classList.add("d-flex");
+                                p.classList.add("justify-content-between");
+                                p.classList.add("align-items-center");
+                                p.innerHTML = `${product.product} de ${product.litros}lts: <span>$${product.price}</span>`;
+                                article.append(p);
                                 total = total + product.price;
                             }
                         });
@@ -185,7 +182,7 @@ function showCarrito(carrito) {
                     `;
                     document
                         .getElementById("comprarElCarrito")
-                        ?.addEventListener("click", () => {
+                        .addEventListener("click", () => {
                             localStorage.removeItem("carrito");
                             carrito.splice(0, carrito.length);
                             canvas.innerHTML = `
