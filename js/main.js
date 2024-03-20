@@ -3,6 +3,10 @@ import { login } from "./user/functions/login.js";
 import { logout } from "./user/functions/logout.js";
 
 document.addEventListener("DOMContentLoaded", () => {
+    
+    // Inicializamos la base de datos de los usuarios u obtenemos la misma.
+    const users = getDataBase();
+    
     // Obtenemos al usuario si es que ha iniciado sesion.
     const userLogin = getUser();
 
