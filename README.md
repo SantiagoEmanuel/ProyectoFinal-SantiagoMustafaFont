@@ -1,33 +1,34 @@
-# Pre-entrega número tres - Planta de agua y hielo.
+# Agua Santa Angela
 
-¡Bienvenido al proyecto de la planta de agua y hielo "Agua Santa Ángela"! Esta aplicación web proporciona una plataforma para que los usuarios puedan registrarse, iniciar sesión, realizar compras de agua y hielo, y gestionar su carrito de compras. Con una interfaz moderna y receptiva basada en el framework Bootstrap, "Agua Santa Ángela" ofrece una experiencia de usuario intuitiva y satisfactoria.
+Agua Santa Angela es una aplicación web que permite a los usuarios registrar, iniciar sesión, realizar compras de agua y hielo, y gestionar su carrito de compras. Esta aplicación proporciona una experiencia de usuario intuitiva y satisfactoria, con una interfaz moderna y receptiva basada en el framework Bootstrap.
+
+## Tabla de Contenidos
+
+1. [Funcionalidades](#funcionalidades)
+2. [Instalación](#instalación)
+3. [Estructura del Proyecto](#estructura-del-proyecto)
+4. [Tecnologías Utilizadas](#tecnologías-utilizadas)
+5. [Autor](#autor)
+6. [Licencia](#licencia)
 
 ## Funcionalidades
 
-### Registro de Usuarios
-
-Los usuarios pueden registrarse en la plataforma proporcionando un nombre de usuario, correo electrónico y contraseña. Se aplican validaciones para garantizar la seguridad de las credenciales de usuario.
-
-### Inicio de Sesión
-
-Los usuarios pueden iniciar sesión utilizando su correo electrónico y contraseña. Se utiliza el almacenamiento local (`LocalStorage`) para recuperar el carrito de compras guardado previamente al iniciar sesión.
-
-### Cerrar Sesión
-
-Los usuarios pueden cerrar sesión en cualquier momento. El carrito de compras se guarda automáticamente en `LocalStorage` para que los usuarios puedan retomar su sesión en futuras visitas.
-
-### Carrito de Compras
-
-Los usuarios pueden agregar productos al carrito de compras y realizar compras de manera conveniente. La plataforma proporciona una vista detallada del carrito de compras, incluyendo los productos agregados y su precio total.
+- **Registro de Usuarios:** Los usuarios pueden registrarse en la plataforma proporcionando un nombre de usuario, correo electrónico y contraseña. Se aplican validaciones para garantizar la seguridad de las credenciales de usuario.
+  
+- **Inicio de Sesión:** Los usuarios pueden iniciar sesión utilizando su correo electrónico y contraseña. Se utiliza el almacenamiento local para recuperar el carrito de compras guardado previamente al iniciar sesión.
+  
+- **Cerrar Sesión:** Los usuarios pueden cerrar sesión en cualquier momento. El carrito de compras se guarda automáticamente en el almacenamiento local para que los usuarios puedan retomar su sesión en futuras visitas.
+  
+- **Carrito de Compras:** Los usuarios pueden agregar productos al carrito de compras y realizar compras de manera conveniente. La plataforma proporciona una vista detallada del carrito de compras, incluyendo los productos agregados y su precio total.
 
 ## Instalación
 
-Para probar la Planta de Agua y Hielo en tu máquina local, sigue estos pasos:
+Para probar Agua Santa Angela en tu máquina local, sigue estos pasos:
 
 1. Clona este repositorio a tu máquina local utilizando el siguiente comando:
 
-    ```git
-    git clone https://github.com/SantiagoEmanuel/preEntrega-SantiagoMustafaFont.git
+    ```
+    git clone https://github.com/SantiagoEmanuel/ProyectoFinal-SantiagoMustafaFont.git
     ```
 
 2. Abre el archivo `index.html` en tu navegador web favorito para comenzar a explorar la aplicación.
@@ -37,53 +38,70 @@ Para probar la Planta de Agua y Hielo en tu máquina local, sigue estos pasos:
 La estructura del proyecto es la siguiente:
 
 ```project root
-planta-agua-hielo/
-│
-├── assets/
-│ ├── envases/
-│ │ └── envase-20.webp
-│ ├── hielo/
-│ │ └── hielo-3.png
-│ ├── alert.png
-│ ├── carrito.png
-│ ├── email-icon.png
-│ ├── error-404.png
-│ ├── password-icon.png
-│ └── user-icon.png
-│
-├── data/
-│ └── products.json
-│
-├── css/
-│ └── style.css
-│
-├── js/
-│ ├── user/
-│ │ ├── class/
-│ │ │ └── user.js
-│ │ └── functions/
-│ │   ├── register.js
-│ │   ├── login.js
-│ │   └── logout.js
-│ └── main.js
-│
-├── pages/
-│ ├── login.html
-│ └── register.html
-│
-├── .gitignore
-│
-├── index.html
-│
-└── README.md
+    agua-santa-angela/
+    │
+    ├── assets/
+    │ ├── fonts/
+    │ │ ├── CascadiaCodePL-Bold.ttf
+    │ │ ├── CascadiaCodePL-Light.ttf
+    │ │ ├── CascadiaCodePL-Regular.ttf
+    │ │ ├── CascadiaCodePL-SemiBold.ttf
+    │ │ └── CascadiaCodePL-SemiLight.ttf
+    │ └── img/
+    │   ├── envases/
+    │   │ └── envase-20.webp
+    │   ├── hielo/
+    │   │ └── hielo-3.png
+    │   └── icons/ 
+    │    ├── alert.png
+    │    ├── carrito.png
+    │    ├── email-icon.png
+    │    ├── error-404.png
+    │    ├── password-icon.png
+    │    └── user-icon.png
+    │
+    ├── data/
+    │ └── products.json
+    │
+    ├── css/
+    │ └── style.css
+    │
+    ├── js/
+    │ ├── user/
+    │ │ ├── class/
+    │ │ │ └── user.js
+    │ │ └── functions/
+    │ │   ├── register.js
+    │ │   ├── login.js
+    │ │   └── logout.js
+    │ └── main.js
+    │
+    ├── pages/
+    │ ├── login.html
+    │ └── register.html
+    │
+    ├── .gitignore
+    │
+    ├── index.html
+    │
+    ├── LICENCE
+    │
+    └── README.md
 ```
 
 ## Tecnologías Utilizadas
 
-- **HTML/CSS/JavaScript**: Para el desarrollo de la aplicación web.
-- **Bootstrap**: Framework de CSS para una interfaz de usuario moderna y receptiva.
-- **LocalStorage**: Para el almacenamiento de datos de usuarios y el carrito de compras.s
+- **HTML/CSS/JavaScript:** Para el desarrollo de la aplicación web.
+  
+- **Bootstrap:** Framework de CSS para una interfaz de usuario moderna y receptiva.
+  
+- **LocalStorage:** Para el almacenamiento de datos de usuarios y el carrito de compras.
 
 ## Autor
 
-Este proyecto fue creado por Santiago Emanuel Mustafá Font. Para cualquier pregunta o sugerencia, no dudes en ponerte en contacto.
+Este proyecto fue creado por Santiago Emanuel Mustafa Font
+
+## Licencia
+
+Este proyecto está bajo la Licencia [MIT](LICENSE), lo que significa que puedes usarlo, copiarlo, modificarlo, fusionarlo, publicarlo, distribuirlo, sublicenciarlo y/o venderlo bajo los términos de la Licencia MIT.
+
