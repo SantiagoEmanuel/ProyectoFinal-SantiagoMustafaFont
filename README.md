@@ -84,7 +84,7 @@ La estructura del proyecto es la siguiente:
     │
     ├── index.html
     │
-    ├── LICENCE
+    ├── LICENSE
     │
     └── README.md
 ```
